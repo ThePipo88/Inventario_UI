@@ -143,7 +143,7 @@ public class FlowController {
         controller.initialize();
         Stage stage = new Stage();
         //stage.getIcons().add(new Image("/cr/ac/una/unaplanilla/resources/FondoUna.png"));
-        stage.setTitle("Control de inventarios");
+        stage.setTitle("Control de Inventarios");
         stage.setOnHidden((WindowEvent event) -> {
             controller.getStage().getScene().setRoot(new Pane());
             controller.setStage(null);
