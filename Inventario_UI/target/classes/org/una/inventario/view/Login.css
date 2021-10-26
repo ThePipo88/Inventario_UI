@@ -1,0 +1,72 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 12 sep. 2020, 19:53:20
+    Author     : Adrian
+*/
+
+.Boton {
+    
+  
+    -fx-background-color: #3C4C6B ;
+    -fx-background-radius:  25px;
+    
+    
+    -fx-effect: dropshadow(one-pass-box, #30d6f8, 22, 0.0 , 0, 0);
+    -fx-effect: innershadow(one-pass-box, #30d6f8, 30, 0.0 , 0, 0);
+    -fx-border-color :  #7D736C;
+    -fx-border-radius: 25px;
+    -fx-border-width: 4;
+    -fx-effect:  dropshadow(three-pass-box, rgba(0,0,0,0.3), 45, 0, 10, 0);
+}
+
+.Boton1 {
+   
+    -fx-background-radius:  25px;
+    
+    
+    -fx-effect: dropshadow(one-pass-box, #30d6f8, 22, 0.0 , 0, 0);
+    -fx-effect: innershadow(one-pass-box, #30d6f8, 30, 0.0 , 0, 0);
+    -fx-border-color :  #119D84;
+    -fx-border-radius: 25px;
+    -fx-border-width: 3;
+    -fx-effect:  dropshadow(three-pass-box, rgba(0,0,0,0.3), 45, 0, 10, 0);
+}
+
+.Fondo {
+    -fx-background-image: url("2.jpg");
+    -fx-background-position: 1900;
+}
+
+.ColorTexto {
+    -fx-text-inner-color: white;
+}
+
+
+.Pane1 {
+  
+  -fx-background-radius:  7;
+   -fx-border-color :  #119D84;
+   -fx-border-radius: 5;
+    -fx-border-width: 5;
+     -fx-background-color: #E1E1E1;
+    
+   
+}
+
+.Pane {
+    -fx-border-width: 4;
+    -fx-background-image: url("FondoLogin.jpg");
+    -fx-background-radius: 28px;
+    -fx-border-radius: 25px;
+    -fx-effect: dropshadow(one-pass-box, black, 100, 0.0, 0, 0);
+}
+.label3 {
+    -fx-font-size: 18px;
+    -fx-text-fill: WHITE;
+    -fx-font-weight: 700;
+    -fx-font-family: ebrima;
+}
