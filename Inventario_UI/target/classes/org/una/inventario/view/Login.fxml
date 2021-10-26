@@ -14,6 +14,11 @@
       <Pane layoutX="269.0" prefHeight="649.0" prefWidth="1087.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="269.0" AnchorPane.rightAnchor="-269.0" AnchorPane.topAnchor="0.0">
          <children>
             <Pane layoutX="-25.0" layoutY="-178.0" prefHeight="303.0" prefWidth="467.0" rotate="41.6" style="-fx-background-color: #FA2C56; -fx-background-radius: 70;" />
+            <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="382.0" layoutY="167.0">
+               <image>
+                  <Image url="@../imagenes/LogoUsuario.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <Pane layoutX="922.0" layoutY="923.0" prefHeight="649.0" prefWidth="1087.0">
@@ -36,10 +41,5 @@
             <Font size="23.0" />
          </font>
       </JFXButton>
-      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="475.0" layoutY="215.0">
-         <image>
-            <Image url="@../imagenes/LogoUsuario.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>

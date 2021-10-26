@@ -28,7 +28,7 @@
       <Pane layoutX="289.0" prefHeight="649.0" prefWidth="631.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="289.0" AnchorPane.rightAnchor="-31.0" AnchorPane.topAnchor="0.0">
          <children>
             <Pane layoutX="-25.0" layoutY="-178.0" prefHeight="303.0" prefWidth="467.0" rotate="41.6" style="-fx-background-color: #FA2C56; -fx-background-radius: 70;" />
-            <TableView fx:id="tb_datos" layoutX="281.0" layoutY="242.0" prefHeight="481.0" prefWidth="680.0">
+            <TableView fx:id="tb_datos" layoutX="281.0" layoutY="242.0" prefHeight="481.0" prefWidth="682.0" stylesheets="@Login.css">
               <columns>
                 <TableColumn fx:id="tb_id" prefWidth="75.0" text="Id" />
                 <TableColumn fx:id="tb_nombre" prefWidth="230.0" text="Nombre" />
