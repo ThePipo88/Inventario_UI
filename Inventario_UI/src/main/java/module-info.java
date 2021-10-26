@@ -7,6 +7,7 @@ module org.una.inventario {
     requires java.logging;
     requires com.jfoenix;
     requires lombok;
+    requires java.net.http;
 
     opens org.una.inventario to javafx.fxml;
     opens org.una.inventario.controller to javafx.fxml;
