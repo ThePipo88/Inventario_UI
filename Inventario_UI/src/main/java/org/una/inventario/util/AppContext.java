@@ -1,5 +1,7 @@
 package org.una.inventario.util;
 
+import org.una.inventario.dto.RolDTO;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -11,7 +13,8 @@ public class AppContext {
 
     private static AppContext INSTANCE = null;
     private static HashMap<String, Object> context = new HashMap<>();
-     
+    private RolDTO rol;
+
     private AppContext() {
         cargarPropiedades();
     }

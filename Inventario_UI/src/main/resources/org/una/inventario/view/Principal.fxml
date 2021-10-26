@@ -16,7 +16,7 @@
             <VBox layoutY="160.0" prefHeight="356.0" prefWidth="262.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="160.0" />
             <Pane layoutY="86.0" prefHeight="61.0" prefWidth="262.0" style="-fx-background-color: #FA2C56; -fx-background-radius: 5;">
                <children>
-                  <Label layoutX="25.0" layoutY="17.0" text="Home Space" textFill="WHITE">
+                  <Label fx:id="txtUsuario" layoutX="25.0" layoutY="17.0" text="Home Space" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>

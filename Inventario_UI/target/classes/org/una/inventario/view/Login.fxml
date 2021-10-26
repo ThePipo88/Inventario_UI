@@ -26,12 +26,12 @@
             <Pane layoutX="-25.0" layoutY="-178.0" prefHeight="303.0" prefWidth="467.0" rotate="41.6" style="-fx-background-color: #FA2C56; -fx-background-radius: 70;" />
          </children>
       </Pane>
-      <JFXTextField alignment="CENTER" labelFloat="true" layoutX="550.0" layoutY="350.0" prefHeight="25.0" prefWidth="359.0" promptText="Usuario" style="-fx-prompt-text-fill: White;" styleClass="label3" stylesheets="@Login.css">
+      <JFXTextField fx:id="txtUsuario" alignment="CENTER" labelFloat="true" layoutX="550.0" layoutY="350.0" prefHeight="25.0" prefWidth="359.0" promptText="Usuario" style="-fx-prompt-text-fill: White;" styleClass="label3" stylesheets="@Login.css">
          <font>
             <Font size="20.0" />
          </font>
       </JFXTextField>
-      <JFXPasswordField alignment="CENTER" labelFloat="true" layoutX="551.0" layoutY="450.0" prefHeight="25.0" prefWidth="359.0" promptText="Contraseña" style="-fx-prompt-text-fill: White;" styleClass="label3" stylesheets="@Login.css">
+      <JFXPasswordField fx:id="txtContrasena" alignment="CENTER" labelFloat="true" layoutX="551.0" layoutY="450.0" prefHeight="25.0" prefWidth="359.0" promptText="Contraseña" style="-fx-prompt-text-fill: White;" styleClass="label3" stylesheets="@Login.css">
          <font>
             <Font size="20.0" />
          </font>

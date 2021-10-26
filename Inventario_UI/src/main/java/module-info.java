@@ -8,10 +8,12 @@ module org.una.inventario {
     requires com.jfoenix;
     requires lombok;
     requires java.net.http;
+    requires com.fasterxml.jackson.databind;
 
     opens org.una.inventario to javafx.fxml;
     opens org.una.inventario.controller to javafx.fxml;
     exports org.una.inventario;
     exports org.una.inventario.controller;
+    exports org.una.inventario.dto to com.fasterxml.jackson.databind;
     opens org.una.inventario.data to javafx.base;
 }

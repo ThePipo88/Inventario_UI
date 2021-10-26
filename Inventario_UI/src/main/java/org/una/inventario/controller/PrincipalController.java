@@ -5,10 +5,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.una.inventario.data.Reporte;
+import org.una.inventario.dto.AuthenticationResponse;
+import org.una.inventario.util.AppContext;
 
 
 public class PrincipalController extends Controller{
@@ -17,6 +20,8 @@ public class PrincipalController extends Controller{
     public TableView<Reporte> tb_datos;
     @FXML
     public JFXButton btnGenerar;
+    @FXML
+    public Label txtUsuario;
     @FXML
     private TableColumn tb_id;
     @FXML
@@ -32,7 +37,10 @@ public class PrincipalController extends Controller{
 
     @Override
     public void initialize() {
-       reportes.add(new Reporte("1","Desinfectante","2021-01-01","Activo","Suavitel"));
+        AuthenticationResponse authenticationResponse = (AuthenticationResponse) AppContext.getInstance().get("Rol");
+        txtUsuario.setText(authenticationResponse.getUsuarioDTO().getNombreCompleto());
+
+        reportes.add(new Reporte("1","Desinfectante","2021-01-01","Activo","Suavitel"));
         reportes.add(new Reporte("2","Lo que sea","2021-01-01","Activo","Suavitel"));
         reportes.add(new Reporte("3","Lo que seargfrbt","2021-01-01","Activo","Suartvrtvitel"));
         reportes.add(new Reporte("4","Lo qurtvrtve sea","2021-01-01","Activortv","Suavitrtvrtvel"));
