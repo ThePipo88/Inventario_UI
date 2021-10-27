@@ -8,11 +8,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.una.inventario.data.Reporte;
+import org.una.inventario.dto.ActivoDTO;
 import org.una.inventario.dto.AuthenticationResponse;
+import org.una.inventario.service.ActivoService;
 import org.una.inventario.util.AppContext;
 import org.una.inventario.util.Mensaje;
 
+import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 
 public class PrincipalController extends Controller{
@@ -65,10 +70,11 @@ public class PrincipalController extends Controller{
         this.tb_fecha.setCellValueFactory(new PropertyValueFactory("fecha"));
         this.tb_estado.setCellValueFactory(new PropertyValueFactory("estado"));
         this.tb_marca.setCellValueFactory(new PropertyValueFactory("marca"));
-
+        reportes.add(new Reporte("","","","",""));
+        this.tb_datos.setItems(reportes);
     }
 
-    public void ActionProveedor(ActionEvent actionEvent) {
+    public void ActionProveedor(ActionEvent actionEvent) throws IOException, ExecutionException, InterruptedException {
         LocalDate inicio = dateInicial.getValue();
         LocalDate fin = dateFinal.getValue();
 
@@ -76,10 +82,12 @@ public class PrincipalController extends Controller{
             txtAgrupacion.setText("Proveedor");
             this.tb_datos.getColumns().get(4).setText("Proveedor");
             reportes.clear();
-            reportes.add(new Reporte("1","Desinfectante","2021-01-01","Activo","Suavitel"));
-            reportes.add(new Reporte("2","Lo que sea","2021-01-01","Activo","Suavitel"));
-            reportes.add(new Reporte("3","Lo que seargfrbt","2021-01-01","Activo","Suartvrtvitel"));
-            reportes.add(new Reporte("4","Lo qurtvrtve sea","2021-01-01","Activortv","Suavitrtvrtvel"));
+
+            List<ActivoDTO> activos = ActivoService.getActivo(inicio.toString(),fin.toString());
+
+            for(ActivoDTO activo:activos) {
+                reportes.add(new Reporte(activo.getId().toString(),activo.getNombre(),activo.getFechaCreacion().toString(),"1",activo.getProveedor().getNombre()));
+            }
 
             this.tb_datos.setItems(reportes);
         }
@@ -88,7 +96,7 @@ public class PrincipalController extends Controller{
         }
     }
 
-    public void ActionMarca(ActionEvent actionEvent) {
+    public void ActionMarca(ActionEvent actionEvent) throws IOException, ExecutionException, InterruptedException {
 
         LocalDate inicio = dateInicial.getValue();
         LocalDate fin = dateFinal.getValue();
@@ -97,11 +105,12 @@ public class PrincipalController extends Controller{
             txtAgrupacion.setText("Marca");
             this.tb_datos.getColumns().get(4).setText("Marca");
             reportes.clear();
-            reportes.add(new Reporte("1","Desinfectante","2021-01-01","Activo","Suavitel"));
-            reportes.add(new Reporte("2","Lo que sea","2021-01-01","Activo","Suavitel"));
-            reportes.add(new Reporte("3","Lo que seargfrbt","2021-01-01","Activo","Suartvrtvitel"));
-            reportes.add(new Reporte("4","Lo qurtvrtve sea","2021-01-01","Activortv","Suavitrtvrtvel"));
-            reportes.add(new Reporte("5","Lo qurtvrtve sea","2021-01-01","Activortv","Suavitrtvrtvel"));
+            
+            List<ActivoDTO> activos = ActivoService.getActivo(inicio.toString(),fin.toString());
+
+            for(ActivoDTO activo:activos) {
+                reportes.add(new Reporte(activo.getId().toString(),activo.getNombre(),activo.getFechaCreacion().toString(),"1",activo.getMarca().getNombre()));
+            }
 
             this.tb_datos.setItems(reportes);
 
