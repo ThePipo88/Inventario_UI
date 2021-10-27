@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @Builder
-public class Reporte{
+public class Reporte implements Comparable<Reporte>{
 
     private final String id;
 
@@ -19,4 +19,8 @@ public class Reporte{
 
     private final String marca;
 
+    @Override
+    public int compareTo(Reporte o) {
+        return this.getMarca().compareTo(o.getMarca());
+    }
 }

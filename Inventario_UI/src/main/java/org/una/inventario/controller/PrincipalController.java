@@ -19,6 +19,7 @@ import org.una.inventario.util.Mensaje;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -90,9 +91,13 @@ public class PrincipalController extends Controller{
 
             List<ActivoDTO> activos = ActivoService.getActivo(inicio.toString(),fin.toString());
 
+
+
             for(ActivoDTO activo:activos) {
                 reportes.add(new Reporte(activo.getId().toString(),activo.getNombre(),activo.getFechaCreacion().toString(),"1",activo.getProveedor().getNombre()));
             }
+
+            Collections.sort(reportes);
 
             this.tb_datos.setItems(reportes);
         }
@@ -117,6 +122,8 @@ public class PrincipalController extends Controller{
                 reportes.add(new Reporte(activo.getId().toString(),activo.getNombre(),activo.getFechaCreacion().toString(),"1",activo.getMarca().getNombre()));
             }
 
+            Collections.sort(reportes);
+            
             this.tb_datos.setItems(reportes);
 
         }else{
