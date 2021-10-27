@@ -7,11 +7,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import org.una.inventario.data.Reporte;
 import org.una.inventario.dto.ActivoDTO;
 import org.una.inventario.dto.AuthenticationResponse;
 import org.una.inventario.service.ActivoService;
 import org.una.inventario.util.AppContext;
+import org.una.inventario.util.FlowController;
 import org.una.inventario.util.Mensaje;
 
 import java.io.IOException;
@@ -38,6 +41,8 @@ public class PrincipalController extends Controller{
     public JFXButton btnMarca;
     @FXML
     public Label txtAgrupacion;
+    @FXML
+    public JFXButton btnSalir;
     @FXML
     private TableColumn tb_id;
     @FXML
@@ -117,5 +122,10 @@ public class PrincipalController extends Controller{
         }else{
             msg.show(Alert.AlertType.ERROR, "Error", "La fechas ingresadas son incorrectas, vuelva a intentarlo");
         }
+    }
+
+    public void ActionSalir(ActionEvent actionEvent) {
+        AppContext.getInstance().delete("Rol");
+        FlowController.getInstance().goViewInStage("Login",stage);
     }
 }
