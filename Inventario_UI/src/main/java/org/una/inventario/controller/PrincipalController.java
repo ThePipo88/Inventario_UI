@@ -68,6 +68,9 @@ public class PrincipalController extends Controller{
 
     public void btnGenerar(ActionEvent actionEvent) {
 
+
+
+
     }
 
     private void inicializarTabla(){
