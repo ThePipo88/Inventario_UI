@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="clases">
+    <output-path>$PROJECT_DIR$/out/artifacts/clases</output-path>
+    <root id="archive" name="clases.jar">
+      <element id="directory" name="org">
+        <element id="directory" name="una">
+          <element id="directory" name="inventario">
+            <element id="directory" name="data">
+              <element id="file-copy" path="$PROJECT_DIR$/src/main/java/org/una/inventario/data/Reporte.java" />
+            </element>
+          </element>
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

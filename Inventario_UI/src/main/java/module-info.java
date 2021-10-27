@@ -9,6 +9,8 @@ module org.una.inventario {
     requires lombok;
     requires java.net.http;
     requires com.fasterxml.jackson.databind;
+    requires jasperreports;
+    requires java.desktop;
 
     opens org.una.inventario to javafx.fxml;
     opens org.una.inventario.controller to javafx.fxml;

@@ -9,7 +9,15 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
+import javax.swing.WindowConstants;
 import org.una.inventario.data.Reporte;
+import org.una.inventario.data.ReporteDataSource;
 import org.una.inventario.dto.ActivoDTO;
 import org.una.inventario.dto.AuthenticationResponse;
 import org.una.inventario.service.ActivoService;
@@ -59,6 +67,8 @@ public class PrincipalController extends Controller{
 
     private static Mensaje msg = new Mensaje();
 
+    private Object [][] listadoPaises = null;
+
     @Override
     public void initialize() {
         AuthenticationResponse authenticationResponse = (AuthenticationResponse) AppContext.getInstance().get("Rol");
@@ -67,10 +77,19 @@ public class PrincipalController extends Controller{
     }
 
     public void btnGenerar(ActionEvent actionEvent) {
+        try{
+
+            JasperReport report = (JasperReport) JRLoader.loadObject(getClass().getResource("/org/una/inventario/reporteJasper/Datos.jasper"));
+            JasperPrint jprint = JasperFillManager.fillReport(report, null, ReporteDataSource.getDataSource());
+
+            JasperViewer view = new JasperViewer(jprint, false);
+            view.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            view.setVisible(true);
 
 
-
-
+        }catch(JRException ex){
+            ex.getMessage();
+        }
     }
 
     private void inicializarTabla(){
@@ -102,7 +121,10 @@ public class PrincipalController extends Controller{
 
             Collections.sort(reportes);
 
+            AppContext.getInstance().set("reporte",reportes);
+
             this.tb_datos.setItems(reportes);
+
         }
         else{
             msg.show(Alert.AlertType.ERROR, "Error", "La fechas ingresadas son incorrectas, vuelva a intentarlo");
