@@ -113,17 +113,18 @@ public class PrincipalController extends Controller{
 
             List<ActivoDTO> activos = ActivoService.getActivo(inicio.toString(),fin.toString());
 
+            if(activos != null){
 
+                for(ActivoDTO activo:activos) {
+                    reportes.add(new Reporte(activo.getId().toString(),activo.getNombre(),activo.getFechaCreacion().toString(),"1",activo.getProveedor().getNombre()));
+                }
 
-            for(ActivoDTO activo:activos) {
-                reportes.add(new Reporte(activo.getId().toString(),activo.getNombre(),activo.getFechaCreacion().toString(),"1",activo.getProveedor().getNombre()));
+                Collections.sort(reportes);
+                AppContext.getInstance().delete("reporte");
+                AppContext.getInstance().set("reporte",reportes);
+
+                this.tb_datos.setItems(reportes);
             }
-
-            Collections.sort(reportes);
-
-            AppContext.getInstance().set("reporte",reportes);
-
-            this.tb_datos.setItems(reportes);
 
         }
         else{
@@ -140,16 +141,20 @@ public class PrincipalController extends Controller{
             txtAgrupacion.setText("Marca");
             this.tb_datos.getColumns().get(4).setText("Marca");
             reportes.clear();
-            
+
             List<ActivoDTO> activos = ActivoService.getActivo(inicio.toString(),fin.toString());
 
-            for(ActivoDTO activo:activos) {
-                reportes.add(new Reporte(activo.getId().toString(),activo.getNombre(),activo.getFechaCreacion().toString(),"1",activo.getMarca().getNombre()));
-            }
+            if(activos != null){
+                for(ActivoDTO activo:activos) {
+                    reportes.add(new Reporte(activo.getId().toString(),activo.getNombre(),activo.getFechaCreacion().toString(),"1",activo.getMarca().getNombre()));
+                }
 
-            Collections.sort(reportes);
-            
-            this.tb_datos.setItems(reportes);
+                Collections.sort(reportes);
+                AppContext.getInstance().delete("reporte");
+                AppContext.getInstance().set("reporte",reportes);
+
+                this.tb_datos.setItems(reportes);
+            }
 
         }else{
             msg.show(Alert.AlertType.ERROR, "Error", "La fechas ingresadas son incorrectas, vuelva a intentarlo");
