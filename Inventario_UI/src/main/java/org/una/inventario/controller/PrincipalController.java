@@ -116,7 +116,7 @@ public class PrincipalController extends Controller{
             if(activos != null){
 
                 for(ActivoDTO activo:activos) {
-                    reportes.add(new Reporte(activo.getId().toString(),activo.getNombre(),activo.getFechaCreacion().toString(),"1",activo.getProveedor().getNombre()));
+                    reportes.add(new Reporte(activo.getId().toString(),activo.getNombre(),activo.getFechaCreacion().toString(),String.valueOf(activo.isEstado()),activo.getProveedor().getNombre()));
                 }
 
                 Collections.sort(reportes);
@@ -146,7 +146,7 @@ public class PrincipalController extends Controller{
 
             if(activos != null){
                 for(ActivoDTO activo:activos) {
-                    reportes.add(new Reporte(activo.getId().toString(),activo.getNombre(),activo.getFechaCreacion().toString(),"1",activo.getMarca().getNombre()));
+                    reportes.add(new Reporte(activo.getId().toString(),activo.getNombre(),activo.getFechaCreacion().toString(),String.valueOf(activo.isEstado()),activo.getMarca().getNombre()));
                 }
 
                 Collections.sort(reportes);
