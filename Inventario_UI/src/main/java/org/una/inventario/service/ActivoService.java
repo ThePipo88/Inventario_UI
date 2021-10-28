@@ -36,6 +36,9 @@ public class ActivoService {
         if(response.get().statusCode() == 500){
             msg.show(Alert.AlertType.ERROR, "Error", "Activos no encontrados entre el rango de fechas especificadas");
         }
+        else if(response.get().statusCode() == 403){
+            msg.show(Alert.AlertType.ERROR, "Error", "Se requiere un permiso adicional para realizar esta acción");
+        }
         else
         {
             activos = mapper.readValue(response.get().body(), new TypeReference<List<ActivoDTO>>() {});
