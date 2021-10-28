@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a96ade3-7a7e-46b0-8b6f-376e4c882ba6" name="Changes" comment="" />
+    <list default="true" id="3a96ade3-7a7e-46b0-8b6f-376e4c882ba6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Inventario_UI/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Inventario_UI/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Inventario_UI/src/main/java/org/una/inventario/dto/AuthenticationRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Inventario_UI/src/main/java/org/una/inventario/dto/AuthenticationRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Inventario_UI/src/main/java/org/una/inventario/dto/AuthenticationResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/Inventario_UI/src/main/java/org/una/inventario/dto/AuthenticationResponse.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
