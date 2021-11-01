@@ -5,21 +5,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
-import javax.swing.WindowConstants;
 import org.una.inventario.data.Reporte;
 import org.una.inventario.data.ReporteDataSource;
 import org.una.inventario.dto.ActivoDTO;
@@ -29,48 +22,80 @@ import org.una.inventario.util.AppContext;
 import org.una.inventario.util.FlowController;
 import org.una.inventario.util.Mensaje;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-
-public class PrincipalController extends Controller{
-
+public class ReportesController extends Controller{
     @FXML
-    public Label txtUsuario;
+    public TableView<Reporte> tb_datos;
+    @FXML
+    public JFXButton btnGenerar;
+    @FXML
+    public JFXButton btnProveedor;
+    @FXML
+    public DatePicker dateInicial;
+    @FXML
+    public DatePicker dateFinal;
+    @FXML
+    public JFXButton btnMarca;
+    @FXML
+    public Label txtAgrupacion;
     @FXML
     public JFXButton btnSalir;
     @FXML
-    public BorderPane bpMenu;
+    private TableColumn tb_id;
     @FXML
-    public Button btnCSV;
+    private TableColumn tb_nombre;
     @FXML
-    public Button btnReportes;
+    private TableColumn tb_fecha;
+    @FXML
+    public TableColumn tb_estado;
+    @FXML
+    private TableColumn tb_marca;
 
+    private ObservableList<Reporte> reportes = FXCollections.observableArrayList();
+
+    private static Mensaje msg = new Mensaje();
+
+    private Object [][] listadoPaises = null;
 
     @Override
     public void initialize() {
-       AuthenticationResponse rol = (AuthenticationResponse) AppContext.getInstance().get("Rol");
-       txtUsuario.setText(rol.getUsuarioDTO().getNombreCompleto());
+        //AuthenticationResponse authenticationResponse = (AuthenticationResponse) AppContext.getInstance().get("Rol");
+        //txtUsuario.setText(authenticationResponse.getUsuarioDTO().getNombreCompleto());
+        inicializarTabla();
     }
 
-    private void loadUI(String ui){
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource("/org/una/inventario/view/"+ ui +".fxml"));
-        } catch (IOException ex) {
-            Logger.getLogger(PrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+    public void btnGenerar(ActionEvent actionEvent) {
+        try{
+
+            JasperReport report = (JasperReport) JRLoader.loadObject(getClass().getResource("/org/una/inventario/reporteJasper/Datos.jasper"));
+            JasperPrint jprint = JasperFillManager.fillReport(report, null, ReporteDataSource.getDataSource());
+
+            JasperViewer view = new JasperViewer(jprint, false);
+            view.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            view.setVisible(true);
+
+
+        }catch(JRException ex){
+            ex.getMessage();
         }
-        ((VBox) bpMenu.getCenter()).getChildren().clear();
-        ((VBox) bpMenu.getCenter()).getChildren().add(root);
-
     }
 
-<<<<<<< Updated upstream
+    private void inicializarTabla(){
+        this.tb_id.setCellValueFactory(new PropertyValueFactory("id"));
+        this.tb_nombre.setCellValueFactory(new PropertyValueFactory("nombre"));
+        this.tb_fecha.setCellValueFactory(new PropertyValueFactory("fecha"));
+        this.tb_estado.setCellValueFactory(new PropertyValueFactory("estado"));
+        this.tb_marca.setCellValueFactory(new PropertyValueFactory("marca"));
+        reportes.add(new Reporte("","","","",""));
+        this.tb_datos.setItems(reportes);
+    }
+
     public void ActionProveedor(ActionEvent actionEvent) throws IOException, ExecutionException, InterruptedException {
         LocalDate inicio = dateInicial.getValue();
         LocalDate fin = dateFinal.getValue();
@@ -128,18 +153,6 @@ public class PrincipalController extends Controller{
         }else{
             msg.show(Alert.AlertType.ERROR, "Error", "La fechas ingresadas son incorrectas, vuelva a intentarlo");
         }
-=======
-    public void ActionSalir(ActionEvent actionEvent) {
-        AppContext.getInstance().delete("Rol");
-        FlowController.getInstance().goViewInStage("Login",stage);
-    }
-
-    public void onActionCSV(ActionEvent actionEvent) {
-        loadUI("BusquedaCSV");
->>>>>>> Stashed changes
-    }
-
-    public void onActionReportes(ActionEvent actionEvent) {
-        loadUI("Reportes");
     }
 }
+
