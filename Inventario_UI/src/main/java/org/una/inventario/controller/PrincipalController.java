@@ -69,70 +69,7 @@ public class PrincipalController extends Controller{
         ((VBox) bpMenu.getCenter()).getChildren().add(root);
 
     }
-<<<<<<< Updated upstream
 
-<<<<<<< Updated upstream
-    public void ActionProveedor(ActionEvent actionEvent) throws IOException, ExecutionException, InterruptedException {
-        LocalDate inicio = dateInicial.getValue();
-        LocalDate fin = dateFinal.getValue();
-
-        if(inicio != null && fin != null){
-            txtAgrupacion.setText("Proveedor");
-            this.tb_datos.getColumns().get(4).setText("Proveedor");
-            reportes.clear();
-
-            List<ActivoDTO> activos = ActivoService.getActivo(inicio.toString(),fin.toString());
-
-            if(activos != null){
-
-                for(ActivoDTO activo:activos) {
-                    reportes.add(new Reporte(activo.getId().toString(),activo.getNombre(),activo.getFechaCreacion().toString(),"1",activo.getProveedor().getNombre()));
-                }
-
-                Collections.sort(reportes);
-                AppContext.getInstance().delete("reporte");
-                AppContext.getInstance().set("reporte",reportes);
-
-                this.tb_datos.setItems(reportes);
-            }
-
-        }
-        else{
-            msg.show(Alert.AlertType.ERROR, "Error", "La fechas ingresadas son incorrectas, vuelva a intentarlo");
-        }
-    }
-
-    public void ActionMarca(ActionEvent actionEvent) throws IOException, ExecutionException, InterruptedException {
-
-        LocalDate inicio = dateInicial.getValue();
-        LocalDate fin = dateFinal.getValue();
-
-        if(inicio != null && fin != null){
-            txtAgrupacion.setText("Marca");
-            this.tb_datos.getColumns().get(4).setText("Marca");
-            reportes.clear();
-
-            List<ActivoDTO> activos = ActivoService.getActivo(inicio.toString(),fin.toString());
-
-            if(activos != null){
-                for(ActivoDTO activo:activos) {
-                    reportes.add(new Reporte(activo.getId().toString(),activo.getNombre(),activo.getFechaCreacion().toString(),"1",activo.getMarca().getNombre()));
-                }
-
-                Collections.sort(reportes);
-                AppContext.getInstance().delete("reporte");
-                AppContext.getInstance().set("reporte",reportes);
-
-                this.tb_datos.setItems(reportes);
-            }
-
-        }else{
-            msg.show(Alert.AlertType.ERROR, "Error", "La fechas ingresadas son incorrectas, vuelva a intentarlo");
-        }
-=======
-=======
-    
->>>>>>> Stashed changes
     public void ActionSalir(ActionEvent actionEvent) {
         AppContext.getInstance().delete("Rol");
         FlowController.getInstance().goViewInStage("Login",stage);
