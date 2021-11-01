@@ -69,6 +69,7 @@ public class PrincipalController extends Controller{
         ((VBox) bpMenu.getCenter()).getChildren().add(root);
 
     }
+<<<<<<< Updated upstream
 
 <<<<<<< Updated upstream
     public void ActionProveedor(ActionEvent actionEvent) throws IOException, ExecutionException, InterruptedException {
@@ -129,17 +130,20 @@ public class PrincipalController extends Controller{
             msg.show(Alert.AlertType.ERROR, "Error", "La fechas ingresadas son incorrectas, vuelva a intentarlo");
         }
 =======
+=======
+    
+>>>>>>> Stashed changes
     public void ActionSalir(ActionEvent actionEvent) {
         AppContext.getInstance().delete("Rol");
         FlowController.getInstance().goViewInStage("Login",stage);
     }
 
-    public void onActionCSV(ActionEvent actionEvent) {
-        loadUI("BusquedaCSV");
->>>>>>> Stashed changes
-    }
-
     public void onActionReportes(ActionEvent actionEvent) {
         loadUI("Reportes");
+
+    }
+
+    public void onActionCSV(ActionEvent actionEvent) {
+        loadUI("BusquedaCSV");
     }
 }
