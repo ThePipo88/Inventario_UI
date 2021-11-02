@@ -11,6 +11,7 @@ module org.una.inventario {
     requires com.fasterxml.jackson.databind;
     requires jasperreports;
     requires java.desktop;
+    requires com.opencsv;
 
     opens org.una.inventario to javafx.fxml;
     opens org.una.inventario.controller to javafx.fxml;
