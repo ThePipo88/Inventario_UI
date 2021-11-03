@@ -6,25 +6,24 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.Pane?>
 
-
 <Pane fx:id="pPane" prefHeight="900.0" prefWidth="1214.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.inventario.controller.BusquedaCSVController">
    <children>
       <Pane layoutX="-25.0" layoutY="-178.0" prefHeight="303.0" prefWidth="467.0" rotate="41.6" style="-fx-background-color: #FA2C56; -fx-background-radius: 70;" />
       <JFXButton fx:id="btnBuscar" layoutX="125.0" layoutY="841.0" onAction="#onActionBuscar" stylesheets="@Login.css" text="Buscar datos" />
-      <ListView fx:id="ListViewActivos" layoutX="46.0" layoutY="509.0" prefHeight="313.0" prefWidth="242.0" />
-      <TableView fx:id="tbActivos" layoutX="46.0" layoutY="79.0" prefHeight="399.0" prefWidth="1141.0">
+      <ListView fx:id="ListViewActivos" layoutX="46.0" layoutY="642.0" prefHeight="180.0" prefWidth="242.0" />
+      <TableView fx:id="tbActivos" layoutX="46.0" layoutY="79.0" prefHeight="537.0" prefWidth="1142.0" stylesheets="@Login.css">
         <columns>
-          <TableColumn fx:id="clMarca" prefWidth="116.0" text="Marca" />
-          <TableColumn fx:id="clProveedor" prefWidth="110.0" text="Proveedor" />
-            <TableColumn fx:id="clNumero" prefWidth="52.0" text="Numero" />
-            <TableColumn fx:id="clNota" prefWidth="123.0" text="Nota" />
-            <TableColumn fx:id="clTelefono" prefWidth="102.0" text="Telefono" />
-            <TableColumn fx:id="tlCorreo" prefWidth="143.0" text="Correo" />
-            <TableColumn fx:id="clProveedorFC" prefWidth="131.0" text="Proveedor F. Creacion" />
-            <TableColumn fx:id="clContinente" prefWidth="69.0" text="Continente" />
-            <TableColumn fx:id="clNombre" prefWidth="104.0" text="Nombre" />
-            <TableColumn fx:id="clEstado" prefWidth="68.0" text="Estado" />
-            <TableColumn fx:id="clFechaCreacion" prefWidth="122.0" text="Fecha Creacion" />
+          <TableColumn fx:id="clMarca" onEditCommit="#onEditMarca" prefWidth="116.0" text="Marca" />
+          <TableColumn fx:id="clProveedor" onEditCommit="#onEditProovedor" prefWidth="110.0" text="Proveedor" />
+            <TableColumn fx:id="clNumero" onEditCommit="#onEditNumero" prefWidth="52.0" text="Numero" />
+            <TableColumn fx:id="clNota" onEditCommit="#onEditNota" prefWidth="123.0" text="Nota" />
+            <TableColumn fx:id="clTelefono" onEditCommit="#onEditTelefono" prefWidth="102.0" text="Telefono" />
+            <TableColumn fx:id="tlCorreo" onEditCommit="#onEditCorreo" prefWidth="143.0" text="Correo" />
+            <TableColumn fx:id="clProveedorFC" onEditCommit="#onEditPFC" prefWidth="131.0" text="Proveedor F. Creacion" />
+            <TableColumn fx:id="clContinente" onEditCommit="#onEditContinente" prefWidth="69.0" text="Continente" />
+            <TableColumn fx:id="clNombre" onEditCommit="#onEditNombre" prefWidth="104.0" text="Nombre" />
+            <TableColumn fx:id="clEstado" onEditCommit="#onEditEstado" prefWidth="68.0" text="Estado" />
+            <TableColumn fx:id="clFechaCreacion" onEditCommit="#onEditFechaCreacion" prefWidth="122.0" text="Fecha Creacion" />
         </columns>
       </TableView>
    </children>

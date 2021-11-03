@@ -13,8 +13,9 @@ module org.una.inventario {
     requires java.desktop;
     requires com.opencsv;
 
+
     opens org.una.inventario to javafx.fxml;
-    opens org.una.inventario.controller to javafx.fxml;
+    opens org.una.inventario.controller to javafx.fxml, javafx.controls, javafx.base;
     exports org.una.inventario;
     exports org.una.inventario.controller;
     exports org.una.inventario.dto to com.fasterxml.jackson.databind;
