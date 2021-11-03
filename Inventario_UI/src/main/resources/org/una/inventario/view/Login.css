@@ -63,6 +63,13 @@
     -fx-font-family: ebrima;
 }
 
+.label4 {
+    -fx-font-size: 10px;
+    -fx-text-fill: WHITE;
+    -fx-font-weight: 700;
+    -fx-font-family: ebrima;
+}
+
 .table-view{
    -fx-background-color: transparent;
 }
