@@ -22,7 +22,10 @@ import org.una.inventario.util.Mensaje;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class BusquedaCSVController extends Controller{
     @FXML
@@ -180,5 +183,54 @@ public class BusquedaCSVController extends Controller{
         }
 
         tbActivos.setItems(activos);
+    }
+    private boolean revisarCorreo(String correo){
+        // Patrón para validar el email
+        // Patrón para validar el email
+        Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)(\\.[A-Za-z]{2,})$");
+
+        // El email a validar
+        String email = correo;
+
+        Matcher mather = pattern.matcher(email);
+
+        if (mather.find() == true) {
+            System.out.println("El email ingresado es válido.");
+            return true;
+        } else {
+            System.out.println("El email ingresado es inválido.");
+            return false;
+        }
+    }
+
+    private boolean validarFecha(String dato){
+        boolean validar = false;
+        try{
+            Date date = new SimpleDateFormat("dd/MM/yyyy").parse(dato);
+            System.out.println("Fecha buena");
+            return true;
+        }catch (Exception e){
+            System.out.println("Fecha mala");
+            return false;
+        }
+    }
+
+    private boolean isNumeric(String cadena){
+        try {
+            Integer.parseInt(cadena);
+            return true;
+        } catch (NumberFormatException nfe){
+            return false;
+        }
+    }
+
+    private boolean validarNumeroTelefono(String numero){
+        String regex = "\\d{4}-\\d{4}"; // XXX-XXX-XXX
+        if(numero.matches(regex)){
+            System.out.println("Numero bueno");
+        }else{
+            System.out.println("Numero malo");
+        }
+        return numero.matches(regex);
     }
 }
