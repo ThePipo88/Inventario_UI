@@ -19,6 +19,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
+import javafx.util.Callback;
 import org.una.inventario.data.ActivoData;
 import org.una.inventario.data.Reporte;
 import org.una.inventario.util.AppContext;
@@ -42,27 +43,27 @@ public class BusquedaCSVController extends Controller{
     @FXML
     public TableView<ActivoData> tbActivos;
     @FXML
-    public TableColumn clMarca;
+    public TableColumn<ActivoData,String> clMarca;
     @FXML
-    public TableColumn clProveedor;
+    public TableColumn<ActivoData,String> clProveedor;
     @FXML
-    public TableColumn clNumero;
+    public TableColumn<ActivoData,String> clNumero;
     @FXML
-    public TableColumn clNota;
+    public TableColumn<ActivoData,String> clNota;
     @FXML
-    public TableColumn clTelefono;
+    public TableColumn<ActivoData,String> clTelefono;
     @FXML
-    public TableColumn tlCorreo;
+    public TableColumn<ActivoData,String> tlCorreo;
     @FXML
-    public TableColumn clProveedorFC;
+    public TableColumn<ActivoData,String> clProveedorFC;
     @FXML
-    public TableColumn clContinente;
+    public TableColumn<ActivoData,String> clContinente;
     @FXML
-    public TableColumn clNombre;
+    public TableColumn<ActivoData,String> clNombre;
     @FXML
-    public TableColumn clEstado;
+    public TableColumn<ActivoData,String> clEstado;
     @FXML
-    public TableColumn clFechaCreacion;
+    public TableColumn<ActivoData,String> clFechaCreacion;
     @FXML
     public JFXTextField txtMarca;
     @FXML
@@ -76,32 +77,41 @@ public class BusquedaCSVController extends Controller{
     @FXML
     public JFXTextField txtCorreo;
     @FXML
-    public JFXTextField txtPFechaCreacion;
+    public JFXTextField txtPFC;
     @FXML
     public JFXTextField txtContinente;
     @FXML
     public JFXTextField txtNombre;
     @FXML
+    public JFXTextField txtEstado;
+    @FXML
     public JFXTextField txtFechaCreacion;
+    @FXML
+    public JFXButton btnModificar;
+    @FXML
+    public JFXButton btnDescargar;
+
 
     private Mensaje msg = new Mensaje();
+
+    private int j = 0;
 
     ObservableList<ActivoData> activos = FXCollections.observableArrayList();
 
     @Override
     public void initialize() {
-        this.clMarca.setCellValueFactory(new PropertyValueFactory("marca"));
-        this.clProveedor.setCellValueFactory(new PropertyValueFactory("proveedor"));
-        this.clNota.setCellValueFactory(new PropertyValueFactory("nota"));
-        this.clNumero.setCellValueFactory(new PropertyValueFactory("numero"));
-        this.clTelefono.setCellValueFactory(new PropertyValueFactory("telefono"));
-        this.tlCorreo.setCellValueFactory(new PropertyValueFactory("correo"));
-        this.clProveedorFC.setCellValueFactory(new PropertyValueFactory("proveedorFechaCreacion"));
-        this.clContinente.setCellValueFactory(new PropertyValueFactory("continente"));
-        this.clNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
-        this.clEstado.setCellValueFactory(new PropertyValueFactory("estado"));
-        this.clFechaCreacion.setCellValueFactory(new PropertyValueFactory("fechaCreacion"));
-        setDataOnTableView();
+        this.clMarca.setCellValueFactory(new PropertyValueFactory<ActivoData,String>("marca"));
+        this.clProveedor.setCellValueFactory(new PropertyValueFactory<ActivoData,String>("proveedor"));
+        this.clNota.setCellValueFactory(new PropertyValueFactory<ActivoData,String>("nota"));
+        this.clNumero.setCellValueFactory(new PropertyValueFactory<ActivoData,String>("numero"));
+        this.clTelefono.setCellValueFactory(new PropertyValueFactory<ActivoData,String>("telefono"));
+        this.tlCorreo.setCellValueFactory(new PropertyValueFactory<ActivoData,String>("correo"));
+        this.clProveedorFC.setCellValueFactory(new PropertyValueFactory<ActivoData,String>("proveedorFechaCreacion"));
+        this.clContinente.setCellValueFactory(new PropertyValueFactory<ActivoData,String>("continente"));
+        this.clNombre.setCellValueFactory(new PropertyValueFactory<ActivoData,String>("nombre"));
+        this.clEstado.setCellValueFactory(new PropertyValueFactory<ActivoData,String>("estado"));
+        this.clFechaCreacion.setCellValueFactory(new PropertyValueFactory<ActivoData,String>("fechaCreacion"));
+
         tbActivos.setEditable(true);
         this.clMarca.setCellFactory(TextFieldTableCell.forTableColumn());
         this.clProveedor.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -114,6 +124,8 @@ public class BusquedaCSVController extends Controller{
         this.clNombre.setCellFactory(TextFieldTableCell.forTableColumn());
         this.clEstado.setCellFactory(TextFieldTableCell.forTableColumn());
         this.clFechaCreacion.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        setDataOnTableView();
     }
 
     public void onActionBuscar(ActionEvent actionEvent) {
@@ -222,14 +234,36 @@ public class BusquedaCSVController extends Controller{
         }
 
         tbActivos.setItems(activos);
-        AppContext.getInstance().set("activos",activos);
 
-        for(int i = 0; i < activos.size(); i++){
-            revisarCorreo(activos.get(i).getCorreo());
-            validarFecha(activos.get(i).getFechaCreacion());
-            isNumeric(activos.get(i).getNumero());
-            validarNumeroTelefono(activos.get(i).getTelefono());
-        }
+        revisarCampos(clTelefono,1);
+        revisarCampos(clProveedorFC,2);
+        revisarCampos(clFechaCreacion,2);
+    }
+
+    private void revisarCampos(TableColumn<ActivoData,String> columna, int tipo){
+
+        columna.setCellFactory(column -> new TableCell<ActivoData, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                this.setStyle("-fx-text-fill: white;");
+                if(item != null){
+                    if(tipo == 1){
+                        if(!validarNumeroTelefono(item)){
+                            this.setStyle("-fx-text-fill: red;");
+                        }
+                    }
+                    else if(tipo == 2){
+                        if(!validarFecha(item)){
+                            this.setStyle("-fx-text-fill: red;");
+                        }
+                    }
+                    else if(tipo == 3){
+                    }
+                    super.updateItem(item, empty);
+                    setText(empty ? null : item);
+                }
+            }
+        });
     }
 
    private boolean revisarCorreo(String correo){
@@ -243,10 +277,8 @@ public class BusquedaCSVController extends Controller{
        Matcher mather = pattern.matcher(email);
 
        if (mather.find() == true) {
-           System.out.println("El email ingresado es válido.");
            return true;
        } else {
-           System.out.println("El email ingresado es inválido.");
            return false;
        }
    }
@@ -255,10 +287,8 @@ public class BusquedaCSVController extends Controller{
         boolean validar = false;
         try{
             Date date = new SimpleDateFormat("dd/MM/yyyy").parse(dato);
-            System.out.println("Fecha buena");
             return true;
         }catch (Exception e){
-            System.out.println("Fecha mala");
             return false;
         }
    }
@@ -274,11 +304,6 @@ public class BusquedaCSVController extends Controller{
 
     private boolean validarNumeroTelefono(String numero){
         String regex = "\\d{4}-\\d{4}"; // XXX-XXX-XXX
-        if(numero.matches(regex)){
-            System.out.println("Numero bueno");
-        }else{
-            System.out.println("Numero malo");
-        }
         return numero.matches(regex);
     }
 
@@ -287,10 +312,74 @@ public class BusquedaCSVController extends Controller{
         tbActivos.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                //ActivoData act= activos.get(tbActivos.getSelectionModel().getSelectedIndex());
-                //txtNombre.setText(act.getNombre());
+                ActivoData act= activos.get(tbActivos.getSelectionModel().getSelectedIndex());
+                txtNombre.setText(act.getNombre());
+                txtEstado.setText(act.getEstado());
+                txtContinente.setText(act.getContinente());
+                txtCorreo.setText(act.getCorreo());
+                txtPFC.setText(act.getProveedorFechaCreacion());
+                txtFechaCreacion.setText(act.getFechaCreacion());
+                txtNumero.setText(act.getNumero());
+                txtMarca.setText(act.getMarca());
+                txtProveedor.setText(act.getProveedor());
+                txtTelefono.setText(act.getTelefono());
+                taNota.setText(act.getNota());
             }
         });
+    }
+
+    public void onActionModificar(ActionEvent actionEvent) {
+        int index = tbActivos.getSelectionModel().getSelectedIndex();
+
+        activos.get(index).setMarca(txtMarca.getText());
+        activos.get(index).setFechaCreacion(txtFechaCreacion.getText());
+        activos.get(index).setEstado(txtEstado.getText());
+        activos.get(index).setNombre(txtNombre.getText());
+        activos.get(index).setContinente(txtContinente.getText());
+        activos.get(index).setCorreo(txtCorreo.getText());
+        activos.get(index).setProveedorFechaCreacion(txtPFC.getText());
+        activos.get(index).setNota(taNota.getText());
+        activos.get(index).setTelefono(txtTelefono.getText());
+        activos.get(index).setNumero(txtNumero.getText());
+        activos.get(index).setProveedor(txtProveedor.getText());
+
+        editarTexto(clMarca,txtMarca.getText());
+        editarTexto(clFechaCreacion,txtFechaCreacion.getText());
+        editarTexto(clEstado,txtEstado.getText());
+        editarTexto(clNombre,txtNombre.getText());
+        editarTexto(clContinente,txtContinente.getText());
+        editarTexto(tlCorreo,txtCorreo.getText());
+        editarTexto(clProveedorFC,txtPFC.getText());
+        editarTexto(clNota,taNota.getText());
+        editarTexto(clTelefono,txtTelefono.getText());
+        editarTexto(clNumero,txtNumero.getText());
+        editarTexto(clProveedor,txtProveedor.getText());
+
+        revisarCampos(clTelefono,1);
+        revisarCampos(clProveedorFC,2);
+        revisarCampos(clFechaCreacion,2);
+    }
+
+    private void editarTexto(TableColumn<ActivoData,String> columna, String texto){
+
+        columna.setCellFactory(column -> new TableCell<ActivoData, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                if(item != null){
+                    if(j == tbActivos.getSelectionModel().getSelectedIndex()){
+                        setText(texto);
+                    }
+                    j++;
+                    super.updateItem(item, empty);
+                    setText(empty ? null : item);
+                }
+            }
+        });
+    }
+
+    public void onActioDescartar(ActionEvent actionEvent) {
+        tbActivos.getItems().remove(tbActivos.getSelectionModel().getSelectedIndex());
+        activos.remove(tbActivos.getSelectionModel().getSelectedIndex());
     }
 
     public void onEditMarca(TableColumn.CellEditEvent cellEditEvent) {

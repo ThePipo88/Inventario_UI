@@ -1,30 +1,121 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Text?>
 
-<Pane fx:id="pPane" prefHeight="900.0" prefWidth="1214.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.inventario.controller.BusquedaCSVController">
+<Pane fx:id="pPane" prefHeight="900.0" prefWidth="1214.0" stylesheets="@Login.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.inventario.controller.BusquedaCSVController">
    <children>
       <Pane layoutX="-25.0" layoutY="-178.0" prefHeight="303.0" prefWidth="467.0" rotate="41.6" style="-fx-background-color: #FA2C56; -fx-background-radius: 70;" />
-      <JFXButton fx:id="btnBuscar" layoutX="125.0" layoutY="841.0" onAction="#onActionBuscar" stylesheets="@Login.css" text="Buscar datos" />
-      <ListView fx:id="ListViewActivos" layoutX="46.0" layoutY="642.0" prefHeight="180.0" prefWidth="242.0" />
-      <TableView fx:id="tbActivos" layoutX="46.0" layoutY="79.0" prefHeight="537.0" prefWidth="1142.0" stylesheets="@Login.css">
+      <JFXButton fx:id="btnBuscar" layoutX="125.0" layoutY="811.0" onAction="#onActionBuscar" stylesheets="@Login.css" text="Buscar datos" />
+      <ListView fx:id="ListViewActivos" layoutX="46.0" layoutY="601.0" prefHeight="192.0" prefWidth="242.0" />
+      <TableView fx:id="tbActivos" layoutX="46.0" layoutY="79.0" prefHeight="482.0" prefWidth="1141.0">
         <columns>
-          <TableColumn fx:id="clMarca" onEditCommit="#onEditMarca" prefWidth="116.0" text="Marca" />
-          <TableColumn fx:id="clProveedor" onEditCommit="#onEditProovedor" prefWidth="110.0" text="Proveedor" />
-            <TableColumn fx:id="clNumero" onEditCommit="#onEditNumero" prefWidth="52.0" text="Numero" />
-            <TableColumn fx:id="clNota" onEditCommit="#onEditNota" prefWidth="123.0" text="Nota" />
-            <TableColumn fx:id="clTelefono" onEditCommit="#onEditTelefono" prefWidth="102.0" text="Telefono" />
-            <TableColumn fx:id="tlCorreo" onEditCommit="#onEditCorreo" prefWidth="143.0" text="Correo" />
-            <TableColumn fx:id="clProveedorFC" onEditCommit="#onEditPFC" prefWidth="131.0" text="Proveedor F. Creacion" />
-            <TableColumn fx:id="clContinente" onEditCommit="#onEditContinente" prefWidth="69.0" text="Continente" />
-            <TableColumn fx:id="clNombre" onEditCommit="#onEditNombre" prefWidth="104.0" text="Nombre" />
-            <TableColumn fx:id="clEstado" onEditCommit="#onEditEstado" prefWidth="68.0" text="Estado" />
-            <TableColumn fx:id="clFechaCreacion" onEditCommit="#onEditFechaCreacion" prefWidth="122.0" text="Fecha Creacion" />
+          <TableColumn fx:id="clMarca" prefWidth="116.0" text="Marca" />
+          <TableColumn fx:id="clProveedor" prefWidth="110.0" text="Proveedor" />
+            <TableColumn fx:id="clNumero" prefWidth="52.0" text="Numero" />
+            <TableColumn fx:id="clNota" prefWidth="123.0" text="Nota" />
+            <TableColumn fx:id="clTelefono" prefWidth="102.0" text="Telefono" />
+            <TableColumn fx:id="tlCorreo" prefWidth="143.0" text="Correo" />
+            <TableColumn fx:id="clProveedorFC" prefWidth="131.0" text="Proveedor F. Creacion" />
+            <TableColumn fx:id="clContinente" prefWidth="69.0" text="Continente" />
+            <TableColumn fx:id="clNombre" prefWidth="104.0" text="Nombre" />
+            <TableColumn fx:id="clEstado" prefWidth="68.0" text="Estado" />
+            <TableColumn fx:id="clFechaCreacion" prefWidth="122.0" text="Fecha Creacion" />
         </columns>
       </TableView>
+      <HBox layoutX="473.0" layoutY="578.0" prefHeight="225.0" prefWidth="465.0" spacing="15.0">
+         <children>
+            <VBox prefHeight="218.0" prefWidth="214.0" spacing="10.0">
+               <children>
+                  <HBox alignment="BOTTOM_CENTER" prefHeight="9.0" prefWidth="198.0">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Marca:" />
+                        <JFXTextField fx:id="txtMarca" prefHeight="25.0" prefWidth="178.0" styleClass="label4" stylesheets="@Login.css" unFocusColor="WHITE" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="9.0" prefWidth="198.0">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Proveedor:" />
+                        <JFXTextField fx:id="txtProveedor" prefHeight="25.0" prefWidth="163.0" styleClass="label4" stylesheets="@Login.css" unFocusColor="WHITE" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="45.0" prefHeight="9.0" prefWidth="198.0">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero:" />
+                        <JFXTextField fx:id="txtNumero" prefHeight="25.0" prefWidth="163.0" styleClass="label4" stylesheets="@Login.css" unFocusColor="WHITE" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="80.0" prefHeight="9.0" prefWidth="198.0">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Nota:" wrappingWidth="29.78125" />
+                        <TextArea fx:id="taNota" prefHeight="200.0" prefWidth="200.0" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="115.0" prefHeight="9.0" prefWidth="198.0">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefono:" />
+                        <JFXTextField fx:id="txtTelefono" prefHeight="25.0" prefWidth="219.0" styleClass="label4" stylesheets="@Login.css" unFocusColor="WHITE" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Line endX="100.0" startX="100.00004577636719" startY="191.47471618652344" stroke="WHITE" />
+            <VBox layoutX="10.0" layoutY="10.0" prefHeight="218.0" prefWidth="214.0" spacing="10.0">
+               <children>
+                  <HBox alignment="BOTTOM_CENTER" prefHeight="9.0" prefWidth="198.0">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Correo:" />
+                        <JFXTextField fx:id="txtCorreo" prefHeight="25.0" prefWidth="178.0" styleClass="label4" stylesheets="@Login.css" unFocusColor="WHITE" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="9.0" prefWidth="198.0">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Proveedor Fecha C." />
+                        <JFXTextField fx:id="txtPFC" prefHeight="25.0" prefWidth="163.0" styleClass="label4" stylesheets="@Login.css" unFocusColor="WHITE" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="45.0" prefHeight="9.0" prefWidth="198.0">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Continente:" />
+                        <JFXTextField fx:id="txtContinente" prefHeight="25.0" prefWidth="163.0" styleClass="label4" stylesheets="@Login.css" unFocusColor="WHITE" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="80.0" prefHeight="9.0" prefWidth="198.0">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre:" />
+                        <JFXTextField fx:id="txtNombre" prefHeight="25.0" prefWidth="185.0" styleClass="label4" stylesheets="@Login.css" unFocusColor="WHITE" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="115.0" prefHeight="9.0" prefWidth="198.0">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Estado:" />
+                        <JFXTextField fx:id="txtEstado" prefHeight="25.0" prefWidth="179.0" styleClass="label4" stylesheets="@Login.css" unFocusColor="WHITE" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="150.0" prefHeight="9.0" prefWidth="198.0">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha Creacion:" />
+                        <JFXTextField fx:id="txtFechaCreacion" prefHeight="25.0" prefWidth="179.0" styleClass="label4" stylesheets="@Login.css" unFocusColor="WHITE" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <JFXButton fx:id="btnModificar" layoutX="607.0" layoutY="811.0" onAction="#onActionModificar" stylesheets="@Login.css" text="Modificar" />
+      <JFXButton fx:id="btnDescargar" layoutX="740.0" layoutY="811.0" onAction="#onActioDescartar" stylesheets="@Login.css" text="Descartar" />
    </children>
 </Pane>
