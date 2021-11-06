@@ -18,12 +18,46 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1214.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.inventario.controller.BusquedaCSVController">
    <children>
-      <Pane fx:id="pPane" prefHeight="900.0" prefWidth="1214.0" style="-fx-background-color: #393351;" stylesheets="@Login.css" visible="false">
+      <Pane fx:id="pane_descripcion" prefHeight="900.0" prefWidth="1214.0" style="-fx-background-color: #393351;" stylesheets="@Login.css">
          <children>
-            <Pane layoutX="-25.0" layoutY="-178.0" prefHeight="303.0" prefWidth="467.0" rotate="41.6" style="-fx-background-color: #FA2C56; -fx-background-radius: 70;" />
-            <JFXButton fx:id="btnBuscar" layoutX="125.0" layoutY="811.0" onAction="#onActionBuscar" stylesheets="@Login.css" text="Buscar datos" />
-            <ListView fx:id="ListViewActivos" layoutX="46.0" layoutY="601.0" prefHeight="192.0" prefWidth="242.0" />
-            <TableView fx:id="tbActivos" layoutX="46.0" layoutY="79.0" prefHeight="482.0" prefWidth="1141.0">
+            <JFXButton fx:id="btnCancelar" layoutX="499.0" layoutY="480.0" onAction="#onActionCancelarDescripcion" styleClass="Boton" stylesheets="@Login.css" text="Cancelar " textFill="WHITE" />
+            <Label layoutX="530.0" layoutY="348.0" prefHeight="55.0" prefWidth="281.0" text=" Mediante la siguiente aplicacion podrás " textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="499.0" layoutY="393.0" text="verificar los datos de un archivo de tipo " textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="573.0" layoutY="82.0" prefHeight="31.0" prefWidth="184.0" text="HOLA! BIENVENIDO! " textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="490.0" layoutY="420.0" text="csv e ingresar losdatos a la base de datos." textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="btnSiguente1" layoutX="742.0" layoutY="480.0" onAction="#onActionSiguienteDescripcion" styleClass="Boton" stylesheets="@Login.css" text="Siguiente" textFill="WHITE" />
+         </children>
+      </Pane>
+      <Pane fx:id="PaneSeleccionar" layoutY="-6.0" prefHeight="900.0" prefWidth="1214.0" style="-fx-background-color: #393351;" visible="false">
+         <children>
+            <JFXButton fx:id="btnCancelar1" layoutX="447.0" layoutY="692.0" onAction="#onActionCancelarSeleccionar" styleClass="Boton" stylesheets="@Login.css" text="Cancelar " textFill="WHITE" />
+            <JFXButton fx:id="btnSiguiente1" layoutX="710.0" layoutY="692.0" onAction="#onActionSiguienteSelecccionar" styleClass="Boton" stylesheets="@Login.css" text="Siguienrte" />
+            <ListView fx:id="ListViewActivos" layoutX="395.0" layoutY="124.0" prefHeight="391.0" prefWidth="431.0" stylesheets="@Login.css" />
+            <JFXButton fx:id="btnBuscar" layoutX="561.0" layoutY="555.0" onAction="#onActionBuscar" styleClass="Boton" stylesheets="@Login.css" text="Buscar datos" />
+            <Pane layoutX="-72.0" layoutY="-160.0" prefHeight="303.0" prefWidth="467.0" rotate="49.4" style="-fx-background-color: #FA2C56; -fx-background-radius: 70;" />
+         </children>
+      </Pane>
+      <Pane fx:id="paneEditar" prefHeight="900.0" prefWidth="1214.0" style="-fx-background-color: #393351;" visible="false">
+         <children>
+            <JFXButton fx:id="btnCancelar2" layoutX="83.0" layoutY="844.0" onAction="#onActionCancelarSubir" styleClass="Boton" stylesheets="@Login.css" text="Cancelar " textFill="WHITE" />
+            <JFXButton fx:id="btnSiguiente11" layoutX="1051.0" layoutY="844.0" onAction="#onActionSiguienteSubir" styleClass="Boton" stylesheets="@Login.css" text="Siguienrte" />
+            <TableView fx:id="tbActivos" layoutX="14.0" layoutY="14.0" prefHeight="482.0" prefWidth="1187.0" stylesheets="@Login.css">
                <columns>
                   <TableColumn fx:id="clMarca" prefWidth="116.0" text="Marca" />
                   <TableColumn fx:id="clProveedor" prefWidth="110.0" text="Proveedor" />
@@ -38,7 +72,7 @@
                   <TableColumn fx:id="clFechaCreacion" prefWidth="122.0" text="Fecha Creacion" />
                </columns>
             </TableView>
-            <HBox layoutX="473.0" layoutY="578.0" prefHeight="225.0" prefWidth="465.0" spacing="15.0">
+            <HBox layoutX="375.0" layoutY="506.0" prefHeight="225.0" prefWidth="465.0" spacing="15.0">
                <children>
                   <VBox prefHeight="218.0" prefWidth="214.0" spacing="10.0">
                      <children>
@@ -120,149 +154,9 @@
                   </VBox>
                </children>
             </HBox>
-            <JFXButton fx:id="btnDescargar" layoutX="681.0" layoutY="811.0" onAction="#onActioDescartar" stylesheets="@Login.css" text="Descartar" />
-            <JFXButton fx:id="btnSubir" layoutX="820.0" layoutY="811.0" onAction="#onActionSubir" stylesheets="@Login.css" text="Subir datos" />
-            <JFXButton fx:id="btnModificar" layoutX="550.0" layoutY="821.0" onAction="#onActionModificar" stylesheets="@Login.css" text="Modificar" />
-         </children>
-      </Pane>
-      <Pane fx:id="pane_descripcion" prefHeight="900.0" prefWidth="1214.0" style="-fx-background-color: #393351;" stylesheets="@Login.css">
-         <children>
-            <JFXButton fx:id="btnCancelar" layoutX="519.0" layoutY="480.0" onAction="#onActionCancelarDescripcion" stylesheets="@Login.css" text="Cancelar " textFill="WHITE" />
-            <Label layoutX="530.0" layoutY="348.0" prefHeight="55.0" prefWidth="281.0" text=" Mediante la siguiente aplicacion podrás " textFill="WHITE">
-               <font>
-                  <Font name="Arial" size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="499.0" layoutY="393.0" text="verificar los datos de un archivo de tipo " textFill="WHITE">
-               <font>
-                  <Font name="Arial" size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="573.0" layoutY="82.0" prefHeight="31.0" prefWidth="184.0" text="HOLA! BIENVENIDO! " textFill="WHITE">
-               <font>
-                  <Font name="Arial" size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="490.0" layoutY="420.0" text="csv e ingresar losdatos a la base de datos." textFill="WHITE">
-               <font>
-                  <Font name="Arial" size="18.0" />
-               </font>
-            </Label>
-            <JFXButton fx:id="btnSiguente1" layoutX="725.0" layoutY="480.0" onAction="#onActionSiguienteDescripcion" stylesheets="@Login.css" text="Siguiente" textFill="WHITE" />
-         </children>
-      </Pane>
-      <Pane fx:id="PaneSeleccionar" layoutY="-6.0" prefHeight="900.0" prefWidth="1214.0" style="-fx-background-color: #393351;" visible="false">
-         <children>
-            <JFXButton fx:id="btnBuscar1" layoutX="574.0" layoutY="599.0" onAction="#onActionBuscar" prefHeight="0.0" prefWidth="83.0" stylesheets="@Login.css" text="Buscar datos" />
-            <ListView fx:id="ListViewActivos1" layoutX="407.0" layoutY="226.0" prefHeight="346.0" prefWidth="417.0" />
-            <JFXButton fx:id="btnCancelar1" layoutX="452.0" layoutY="692.0" onAction="#onActionCancelarSeleccionar" stylesheets="@Login.css" text="Cancelar " textFill="WHITE" />
-            <JFXButton fx:id="btnSiguiente1" layoutX="713.0" layoutY="692.0" onAction="#onActionSiguienteSelecccionar" stylesheets="@Login.css" text="Siguienrte" />
-         </children>
-      </Pane>
-      <Pane fx:id="paneEditar" prefHeight="900.0" prefWidth="1214.0" style="-fx-background-color: #393351;" visible="false">
-         <children>
-            <TableView fx:id="tbActivos1" layoutX="37.0" layoutY="14.0" prefHeight="482.0" prefWidth="1141.0">
-               <columns>
-                  <TableColumn fx:id="clMarca1" prefWidth="116.0" text="Marca" />
-                  <TableColumn fx:id="clProveedor1" prefWidth="110.0" text="Proveedor" />
-                  <TableColumn fx:id="clNumero1" prefWidth="52.0" text="Numero" />
-                  <TableColumn fx:id="clNota1" prefWidth="123.0" text="Nota" />
-                  <TableColumn fx:id="clTelefono1" prefWidth="102.0" text="Telefono" />
-                  <TableColumn fx:id="tlCorreo1" prefWidth="143.0" text="Correo" />
-                  <TableColumn fx:id="clProveedorFC1" prefWidth="131.0" text="Proveedor F. Creacion" />
-                  <TableColumn fx:id="clContinente1" prefWidth="69.0" text="Continente" />
-                  <TableColumn fx:id="clNombre1" prefWidth="104.0" text="Nombre" />
-                  <TableColumn fx:id="clEstado1" prefWidth="68.0" text="Estado" />
-                  <TableColumn fx:id="clFechaCreacion1" prefWidth="122.0" text="Fecha Creacion" />
-               </columns>
-            </TableView>
-            <JFXButton fx:id="btnModificar2" layoutX="581.0" layoutY="822.0" onAction="#onActionModificar" stylesheets="@Login.css" text="Modificar" />
-            <JFXButton fx:id="btnDescargar2" layoutX="683.0" layoutY="822.0" onAction="#onActioDescartar" stylesheets="@Login.css" text="Descartar" />
-            <JFXButton fx:id="btnSubir2" layoutX="767.0" layoutY="822.0" onAction="#onActionSubir" stylesheets="@Login.css" text="Subir datos" />
-            <HBox layoutX="561.0" layoutY="573.0" prefHeight="225.0" prefWidth="465.0" spacing="15.0">
-               <children>
-                  <VBox prefHeight="218.0" prefWidth="214.0" spacing="10.0">
-                     <children>
-                        <HBox alignment="BOTTOM_CENTER" prefHeight="9.0" prefWidth="198.0">
-                           <children>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Marca:" />
-                              <JFXTextField fx:id="txtMarca1" prefHeight="25.0" prefWidth="178.0" styleClass="label4" stylesheets="@Login.css" unFocusColor="WHITE" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="9.0" prefWidth="198.0">
-                           <children>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Proveedor:" />
-                              <JFXTextField fx:id="txtProveedor1" prefHeight="25.0" prefWidth="163.0" styleClass="label4" stylesheets="@Login.css" unFocusColor="WHITE" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="45.0" prefHeight="9.0" prefWidth="198.0">
-                           <children>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero:" />
-                              <JFXTextField fx:id="txtNumero1" prefHeight="25.0" prefWidth="163.0" styleClass="label4" stylesheets="@Login.css" unFocusColor="WHITE" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="80.0" prefHeight="9.0" prefWidth="198.0">
-                           <children>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Nota:" wrappingWidth="29.78125" />
-                              <TextArea fx:id="taNota1" prefHeight="200.0" prefWidth="200.0" />
-                           </children>
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="115.0" prefHeight="9.0" prefWidth="198.0">
-                           <children>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefono:" />
-                              <JFXTextField fx:id="txtTelefono1" prefHeight="25.0" prefWidth="219.0" styleClass="label4" stylesheets="@Login.css" unFocusColor="WHITE" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-                  <Line endX="100.0" startX="100.00004577636719" startY="191.47471618652344" stroke="WHITE" />
-                  <VBox layoutX="10.0" layoutY="10.0" prefHeight="218.0" prefWidth="214.0" spacing="10.0">
-                     <children>
-                        <HBox alignment="BOTTOM_CENTER" prefHeight="9.0" prefWidth="198.0">
-                           <children>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Correo:" />
-                              <JFXTextField fx:id="txtCorreo1" prefHeight="25.0" prefWidth="178.0" styleClass="label4" stylesheets="@Login.css" unFocusColor="WHITE" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="9.0" prefWidth="198.0">
-                           <children>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Proveedor Fecha C." />
-                              <JFXTextField fx:id="txtPFC1" prefHeight="25.0" prefWidth="163.0" styleClass="label4" stylesheets="@Login.css" unFocusColor="WHITE" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="45.0" prefHeight="9.0" prefWidth="198.0">
-                           <children>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Continente:" />
-                              <JFXTextField fx:id="txtContinente1" prefHeight="25.0" prefWidth="163.0" styleClass="label4" stylesheets="@Login.css" unFocusColor="WHITE" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="80.0" prefHeight="9.0" prefWidth="198.0">
-                           <children>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre:" />
-                              <JFXTextField fx:id="txtNombre1" prefHeight="25.0" prefWidth="185.0" styleClass="label4" stylesheets="@Login.css" unFocusColor="WHITE" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="115.0" prefHeight="9.0" prefWidth="198.0">
-                           <children>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Estado:" />
-                              <JFXTextField fx:id="txtEstado1" prefHeight="25.0" prefWidth="179.0" styleClass="label4" stylesheets="@Login.css" unFocusColor="WHITE" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="150.0" prefHeight="9.0" prefWidth="198.0">
-                           <children>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha Creacion:" />
-                              <JFXTextField fx:id="txtFechaCreacion1" prefHeight="25.0" prefWidth="179.0" styleClass="label4" stylesheets="@Login.css" unFocusColor="WHITE" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-            <JFXButton fx:id="btnCancelar2" layoutX="42.0" layoutY="844.0" onAction="#onActionCancelarSubir" stylesheets="@Login.css" text="Cancelar " textFill="WHITE" />
-            <JFXButton fx:id="btnSiguiente11" layoutX="1051.0" layoutY="844.0" onAction="#onActionSiguienteSubir" stylesheets="@Login.css" text="Siguienrte" />
+            <JFXButton fx:id="btnDescargar" layoutX="375.0" layoutY="739.0" onAction="#onActioDescartar" styleClass="Boton" stylesheets="@Login.css" text="Descartar" />
+            <JFXButton fx:id="btnSubir" layoutX="756.0" layoutY="739.0" onAction="#onActionSubir" styleClass="Boton" stylesheets="@Login.css" text="Subir datos" />
+            <JFXButton fx:id="btnModificar" layoutX="570.0" layoutY="739.0" onAction="#onActionModificar" styleClass="Boton" stylesheets="@Login.css" text="Modificar" />
          </children>
       </Pane>
    </children>
