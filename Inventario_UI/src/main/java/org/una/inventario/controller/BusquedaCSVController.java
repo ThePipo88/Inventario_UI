@@ -304,14 +304,34 @@ public class BusquedaCSVController extends Controller{
         });
     }
 
-    private void archivo(){
+    public void archivo(){
+        try{
+            String ruta = new File("ReporteErrores.txt").getAbsolutePath();
+            String contenido = "";
+            String msg = "Lineas con Errores: ";
 
-        for(int i = 0; i < activos.size(); i++){
-           if(!validarNumeroTelefono(activos.get(i).getTelefono()) || !validarFecha(activos.get(i).getFechaCreacion()) || !isString(activos.get(i).getNota())){
-               lineas.add(i+1);
-           }
+            File file = new File(ruta);
+
+            for(int i = 0; i < activos.size(); i++){
+                if(!validarNumeroTelefono(activos.get(i).getTelefono()) || !validarFecha(activos.get(i).getFechaCreacion()) || !isString(activos.get(i).getNota())){
+                    contenido += i+1 + " ";
+                }
+            }
+
+            if(!file.exists()){
+                file.createNewFile();
+            }
+
+            FileWriter fileWriter = new FileWriter(file);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(msg);
+            bufferedWriter.write(contenido);
+            bufferedWriter.close();
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
+
    private boolean revisarCorreo(String correo){
        // Patrón para validar el email
        // Patrón para validar el email
@@ -577,4 +597,5 @@ public class BusquedaCSVController extends Controller{
 
     public void onActionSiguienteSubir(ActionEvent actionEvent) {
     }
+
 }
