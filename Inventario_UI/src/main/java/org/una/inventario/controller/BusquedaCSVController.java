@@ -595,6 +595,8 @@ public class BusquedaCSVController extends Controller{
     }
 
     public void onActionCancelarSubir(ActionEvent actionEvent) {
+        paneEditar.setVisible(false);
+        PaneSeleccionar.setVisible(true);
     }
 
     public void onActionSiguienteSubir(ActionEvent actionEvent) {
