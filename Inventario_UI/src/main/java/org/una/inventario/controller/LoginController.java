@@ -8,6 +8,7 @@ import org.una.inventario.dto.AuthenticationResponse;
 import org.una.inventario.service.LoginService;
 import org.una.inventario.util.FlowController;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
@@ -20,8 +21,8 @@ public class LoginController extends Controller{
 
     @Override
     public void initialize() {
-
     }
+
     public void iniciar(ActionEvent actionEvent) throws IOException, ExecutionException, InterruptedException {
 
         AuthenticationResponse login = LoginService.login(txtUsuario.getText().toString(), txtContrasena.getText().toString());

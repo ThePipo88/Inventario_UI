@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.scene.control.Alert;
 import org.una.inventario.dto.ActivoDTO;
 import org.una.inventario.dto.AuthenticationResponse;
+import org.una.inventario.dto.MarcaDTO;
 import org.una.inventario.util.AppContext;
 import org.una.inventario.util.Mensaje;
 
@@ -14,42 +15,41 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-public class ActivoService {
+public class MarcaService {
     private static final HttpClient client = HttpClient.newBuilder().version(HttpClient.Version.HTTP_2).build();
-    private static final String serviceURL = "http://localhost:8089/activos";
+    private static final String serviceURL = "http://localhost:8089/marcas";
     private static ObjectMapper mapper = new ObjectMapper();
     private static Mensaje msg = new Mensaje();
 
-    public static List<ActivoDTO> getBetweenFecha(String fechaInicial, String fechaFinal) throws InterruptedException, ExecutionException, IOException {
-        List<ActivoDTO> activos = null;
+    public static List<MarcaDTO> getAllMarcas() throws InterruptedException, ExecutionException, IOException {
+        List<MarcaDTO> marcas = null;
         AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("Rol");
 
-        HttpRequest req = HttpRequest.newBuilder(URI.create(serviceURL+"/findByActivoBetweenFecha/"+fechaInicial+"/"+fechaFinal))
+        HttpRequest req = HttpRequest.newBuilder(URI.create(serviceURL))
                 .setHeader("Content-Type", "application/json").setHeader("AUTHORIZATION", "Bearer " + token.getJwt()).GET().build();
         CompletableFuture<HttpResponse<String>> response = client.sendAsync(req, HttpResponse.BodyHandlers.ofString());
 
         if(response.get().statusCode() == 500){
-            msg.show(Alert.AlertType.ERROR, "Error", "Activos no encontrados entre el rango de fechas especificadas");
+            msg.show(Alert.AlertType.ERROR, "Error", "Ocurrio un error cargando las marcas");
         }
         else if(response.get().statusCode() == 403){
             msg.show(Alert.AlertType.ERROR, "Error", "Se requiere un permiso adicional para realizar esta acción");
         }
         else
         {
-            activos = mapper.readValue(response.get().body(), new TypeReference<List<ActivoDTO>>() {});
+            marcas = mapper.readValue(response.get().body(), new TypeReference<List<MarcaDTO>>() {});
             //List<HoraMarcajeDTO> beans = JSONUtils.convertFromJsonToList(response.get().body(), new TypeReference<List<HoraMarcajeDTO>>() {});
             //beans.forEach(System.out::println);
         }
-        return activos;
+        return marcas;
     }
 
-    public static void createActivo(ActivoDTO activo) throws InterruptedException, ExecutionException, JsonProcessingException {
-        String convertJson = mapper.writeValueAsString(activo);
+    public static void createMarca(MarcaDTO marca) throws InterruptedException, ExecutionException, JsonProcessingException {
+        String convertJson = mapper.writeValueAsString(marca);
         AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("Rol");
         HttpRequest request = HttpRequest.newBuilder(URI.create(serviceURL+"/"))
                 .setHeader("Content-Type", "application/json").setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
@@ -58,7 +58,7 @@ public class ActivoService {
         System.out.println(response.get().body());
 
         if(response.get().statusCode() == 500) {
-            msg.show(Alert.AlertType.ERROR, "Error", "Sucedio un error creando el activo");
+            msg.show(Alert.AlertType.ERROR, "Error", "Sucedio un error creando la marca");
         }
         else if(response.get().statusCode() == 403){
             msg.show(Alert.AlertType.ERROR, "Error", "Se requiere un permiso adicional para realizar esta acción");
@@ -69,4 +69,31 @@ public class ActivoService {
         }
         response.join();
     }
+
+    public static MarcaDTO getByNombre(String nombre) throws InterruptedException, ExecutionException, IOException {
+
+        MarcaDTO marca = null;
+        AuthenticationResponse token = (AuthenticationResponse) AppContext.getInstance().get("Rol");
+
+        HttpRequest req = HttpRequest.newBuilder(URI.create(serviceURL+"/nombre/"+nombre))
+                .setHeader("Content-Type", "application/json").setHeader("AUTHORIZATION", "Bearer " + token.getJwt()).GET().build();
+        CompletableFuture<HttpResponse<String>> response = client.sendAsync(req, HttpResponse.BodyHandlers.ofString());
+        response.thenAccept(res -> System.out.println(res));
+
+        if(response.get().statusCode() == 500) {
+            System.out.println("Aerolinea No Encontrada");
+        }
+        else
+        {
+            if (response.get().body().isBlank()) {
+                System.out.println("No existen aerolineas con este Id");
+            }
+            else{
+                marca = mapper.readValue(response.get().body(), MarcaDTO.class);
+            }
+        }
+        response.join();
+        return marca;
+    }
+
 }

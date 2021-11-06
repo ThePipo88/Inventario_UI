@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -47,6 +48,8 @@ public class ReportesController extends Controller{
     @FXML
     public JFXButton btnSalir;
     @FXML
+    public Pane pnReporte;
+    @FXML
     private TableColumn tb_id;
     @FXML
     private TableColumn tb_nombre;
@@ -65,9 +68,18 @@ public class ReportesController extends Controller{
 
     @Override
     public void initialize() {
+        String ventana = (String) AppContext.getInstance().get("Ventana");
+
+        if(ventana == "Reporte"){
+            pnReporte.setVisible(true);
+            inicializarTabla();
+        }
+        else{
+            pnReporte.setVisible(false);
+        }
         //AuthenticationResponse authenticationResponse = (AuthenticationResponse) AppContext.getInstance().get("Rol");
         //txtUsuario.setText(authenticationResponse.getUsuarioDTO().getNombreCompleto());
-        inicializarTabla();
+
     }
 
     public void btnGenerar(ActionEvent actionEvent) {
@@ -105,7 +117,7 @@ public class ReportesController extends Controller{
             this.tb_datos.getColumns().get(4).setText("Proveedor");
             reportes.clear();
 
-            List<ActivoDTO> activos = ActivoService.getActivo(inicio.toString(),fin.toString());
+            List<ActivoDTO> activos = ActivoService.getBetweenFecha(inicio.toString(),fin.toString());
 
             if(activos != null){
 
@@ -136,7 +148,7 @@ public class ReportesController extends Controller{
             this.tb_datos.getColumns().get(4).setText("Marca");
             reportes.clear();
 
-            List<ActivoDTO> activos = ActivoService.getActivo(inicio.toString(),fin.toString());
+            List<ActivoDTO> activos = ActivoService.getBetweenFecha(inicio.toString(),fin.toString());
 
             if(activos != null){
                 for(ActivoDTO activo:activos) {

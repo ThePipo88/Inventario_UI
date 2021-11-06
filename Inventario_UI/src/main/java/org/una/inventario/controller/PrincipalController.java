@@ -76,11 +76,14 @@ public class PrincipalController extends Controller{
     }
 
     public void onActionReportes(ActionEvent actionEvent) {
+        AppContext.getInstance().delete("Ventana");
+        AppContext.getInstance().set("Ventana","Reporte");
         loadUI("Reportes");
-
     }
 
     public void onActionCSV(ActionEvent actionEvent) {
-        loadUI("BusquedaCSV");
+        AppContext.getInstance().delete("Ventana");
+        AppContext.getInstance().set("Ventana","CSV");
+        loadUI("Reportes");
     }
 }
