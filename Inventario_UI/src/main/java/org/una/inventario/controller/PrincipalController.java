@@ -82,8 +82,6 @@ public class PrincipalController extends Controller{
     }
 
     public void onActionCSV(ActionEvent actionEvent) {
-        AppContext.getInstance().delete("Ventana");
-        AppContext.getInstance().set("Ventana","CSV");
-        loadUI("Reportes");
+      FlowController.getInstance().goViewInWindow("BusquedaCSV");
     }
 }

@@ -26,9 +26,11 @@ import org.una.inventario.dto.ActivoDTO;
 import org.una.inventario.dto.MarcaDTO;
 import org.una.inventario.dto.ProveedorDTO;
 import org.una.inventario.dto.RolDTO;
+import org.una.inventario.service.ActivoService;
 import org.una.inventario.service.MarcaService;
 import org.una.inventario.service.ProveedorService;
 import org.una.inventario.util.AppContext;
+import org.una.inventario.util.FlowController;
 import org.una.inventario.util.Mensaje;
 
 import java.io.*;
@@ -48,6 +50,12 @@ public class BusquedaCSVController extends Controller{
     public JFXButton btnBuscar;
     @FXML
     public Pane pPane;
+    @FXML
+    public Pane pane_descripcion;
+    @FXML
+    public Pane PaneSeleccionar ;
+    @FXML
+    public Pane paneEditar ;
     @FXML
     public ListView ListViewActivos;
     @FXML
@@ -121,6 +129,10 @@ public class BusquedaCSVController extends Controller{
 
     @Override
     public void initialize() {
+
+
+        String ventana = (String) AppContext.getInstance().get("Ventana");
+
         this.clMarca.setCellValueFactory(new PropertyValueFactory<ActivoData,String>("marca"));
         this.clProveedor.setCellValueFactory(new PropertyValueFactory<ActivoData,String>("proveedor"));
         this.clNota.setCellValueFactory(new PropertyValueFactory<ActivoData,String>("nota"));
@@ -436,6 +448,7 @@ public class BusquedaCSVController extends Controller{
     }
 
     public void onActionSubir(ActionEvent actionEvent) throws IOException, ExecutionException, InterruptedException, ParseException {
+
         List<MarcaDTO> marcaDB = MarcaService.getAllMarcas();
         List<ProveedorDTO> proveedorDB = ProveedorService.getAllProveedores();
 
@@ -471,11 +484,29 @@ public class BusquedaCSVController extends Controller{
                 }
             }
         }
+
         marcaDB = MarcaService.getAllMarcas();
         proveedorDB = ProveedorService.getAllProveedores();
 
-        //ActivoDTO ac = new ActivoDTO()
-        //List<ProveedorDTO> proveedores = ProveedorService.getAllProveedores();
+        for(int i = 0; i < activos.size(); i++){
+            ActivoDTO newActivo = new ActivoDTO();
+            if(!Objects.equals(activos.get(i).getContinente(), "")){
+                newActivo.setContinente(Long.parseLong(activos.get(i).getContinente()));
+            }
+            boolean est = false;
+            if(Objects.equals(activos.get(i).getEstado(), "activo")){
+                est = true;
+            }else{
+                est = false;
+            }
+            newActivo.setEstado(est);
+            newActivo.setFechaCreacion(converDate(activos.get(i).getFechaCreacion()));
+            newActivo.setMarca(getMarca(marcaDB,activos.get(i).getMarca()));
+            newActivo.setProveedor(getProveedor(proveedorDB,activos.get(i).getProveedor()));
+            newActivo.setNombre(activos.get(i).getNombre());
+            ActivoService.createActivo(newActivo);
+        }
+
     }
 
     private boolean analizarRepetido(String dato, ObservableList<String> lista){
@@ -500,5 +531,50 @@ public class BusquedaCSVController extends Controller{
         LocalDate fecha = LocalDate.parse(date, formato);
         nd = form.parse(fecha.toString());
         return nd;
+    }
+    private MarcaDTO getMarca(List<MarcaDTO> listMarca, String nombre){
+        for(int i = 0; i < listMarca.size(); i++){
+            if(listMarca.get(i).getNombre().equals(nombre)){
+                return listMarca.get(i);
+            }
+        }
+        return null;
+    }
+
+    private ProveedorDTO getProveedor(List<ProveedorDTO> listProveedor, String nombre){
+        for(int i = 0; i < listProveedor.size(); i++){
+            if(listProveedor.get(i).getNombre().equals(nombre)){
+                return listProveedor.get(i);
+            }
+        }
+        return null;
+    }
+    public void onActionCancelarDescripcion(ActionEvent actionEvent) {
+
+        pane_descripcion.setVisible(false);
+        PaneSeleccionar.setVisible(false);
+
+
+    }
+
+    public void onActionSiguienteDescripcion(ActionEvent actionEvent) {
+
+      pane_descripcion.setVisible(false);
+      PaneSeleccionar.setVisible(true);
+
+    }
+
+    public void onActionCancelarSeleccionar(ActionEvent actionEvent) {
+        PaneSeleccionar.setVisible(false);
+        pane_descripcion.setVisible(false);
+    }
+
+    public void onActionSiguienteSelecccionar(ActionEvent actionEvent) {
+    }
+
+    public void onActionCancelarSubir(ActionEvent actionEvent) {
+    }
+
+    public void onActionSiguienteSubir(ActionEvent actionEvent) {
     }
 }
