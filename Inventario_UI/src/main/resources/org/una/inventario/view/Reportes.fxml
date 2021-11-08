@@ -52,7 +52,7 @@
       </Pane>
       <Pane fx:id="pnCSV" layoutX="73.0" layoutY="199.0" prefHeight="665.0" prefWidth="1108.0">
          <children>
-            <Label layoutX="337.0" layoutY="292.0" prefHeight="43.0" prefWidth="447.0" text=" Mediante la siguiente función podrás verificar, corregir" textFill="WHITE">
+            <Label layoutX="337.0" layoutY="292.0" prefHeight="43.0" prefWidth="447.0" text=" Mediante la siguiente funcion podrás verificar, corregir" textFill="WHITE">
                <font>
                   <Font name="Arial" size="18.0" />
                </font>
@@ -62,7 +62,7 @@
                   <Font name="Arial" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="400.0" layoutY="74.0" prefHeight="31.0" prefWidth="309.0" text="Búsqueda y guardado de información" textFill="WHITE">
+            <Label layoutX="400.0" layoutY="74.0" prefHeight="31.0" prefWidth="309.0" text="Busqueda y guardado de información" textFill="WHITE">
                <font>
                   <Font name="Arial" size="18.0" />
                </font>
