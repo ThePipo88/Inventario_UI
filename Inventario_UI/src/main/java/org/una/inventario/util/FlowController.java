@@ -138,6 +138,7 @@ public class FlowController {
     }
 
     public void goViewInWindow(String viewName) {
+        initialize();
         FXMLLoader loader = getLoader(viewName);
         Controller controller = loader.getController();
         controller.initialize();

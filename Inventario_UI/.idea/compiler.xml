@@ -14,4 +14,9 @@
       <module name="Inventario" target="11" />
     </bytecodeTargetLevel>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Inventario" options="--add-exports javafx.controls/com.sun.javafx.scene=org.una.inventario" />
+    </option>
+  </component>
 </project>

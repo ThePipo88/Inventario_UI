@@ -9,11 +9,10 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <Pane prefHeight="900.0" prefWidth="1214.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.inventario.controller.ReportesController">
    <children>
       <Pane layoutX="-25.0" layoutY="-178.0" prefHeight="303.0" prefWidth="467.0" rotate="41.6" style="-fx-background-color: #FA2C56; -fx-background-radius: 70;" />
-      <Pane fx:id="pnReporte" layoutX="63.0" layoutY="189.0" prefHeight="665.0" prefWidth="1108.0">
+      <Pane fx:id="pnReporte" layoutX="63.0" layoutY="189.0" prefHeight="665.0" prefWidth="1108.0" visible="false">
          <children>
             <TableView fx:id="tb_datos" layoutX="231.0" layoutY="43.0" prefHeight="415.0" prefWidth="682.0" stylesheets="@Login.css">
                <columns>
@@ -49,6 +48,31 @@
                   <Font size="17.0" />
                </font>
             </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="pnCSV" layoutX="73.0" layoutY="199.0" prefHeight="665.0" prefWidth="1108.0">
+         <children>
+            <Label layoutX="337.0" layoutY="292.0" prefHeight="43.0" prefWidth="447.0" text=" Mediante la siguiente funcion podrás verificar, corregir" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="370.0" layoutY="325.0" text="o descartar los datos de un archivo de tipo CSV" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="400.0" layoutY="74.0" prefHeight="31.0" prefWidth="309.0" text="Busqueda y guardado de información" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="371.0" layoutY="346.0" text="e ingresar los datos  de este a la base de datos" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="btnComenzar" layoutX="521.0" layoutY="465.0" onAction="#onActionComenzar" styleClass="Boton" stylesheets="@Login.css" text="Comenzar" textFill="WHITE" />
          </children>
       </Pane>
    </children>

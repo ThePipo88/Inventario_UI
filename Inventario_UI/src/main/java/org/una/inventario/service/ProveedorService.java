@@ -57,7 +57,6 @@ public class ProveedorService {
                 .setHeader("Content-Type", "application/json").setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
                 .POST(HttpRequest.BodyPublishers.ofString(convertJson)).build();
         CompletableFuture<HttpResponse<String>> response = client.sendAsync(request,HttpResponse.BodyHandlers.ofString());
-        System.out.println(response.get().body());
 
         if(response.get().statusCode() == 500) {
             msg.show(Alert.AlertType.ERROR, "Error", "Sucedio un error creando el proveedor");

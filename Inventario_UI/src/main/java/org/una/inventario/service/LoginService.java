@@ -36,7 +36,6 @@ public class LoginService {
 
         HttpRequest request = HttpRequest.newBuilder(URI.create(serviceURL)).header("Content-Type", "application/json").POST(HttpRequest.BodyPublishers.ofString(inputJson)).build();
         CompletableFuture<HttpResponse<String>> response = client.sendAsync(request,HttpResponse.BodyHandlers.ofString());
-        System.out.println(response.get().body());
 
        if(response.get().statusCode() == 500){
            System.out.println("Usuario no encontrado");
@@ -48,7 +47,6 @@ public class LoginService {
         }
         else
         {
-            System.out.println("Usuario encontrado");
             AuthenticationResponse authenticationResponse = mapper.readValue(response.get().body(), AuthenticationResponse.class);//Convert Json into object of Specific Type
             AppContext.getInstance().set("Rol",authenticationResponse);
             return authenticationResponse;

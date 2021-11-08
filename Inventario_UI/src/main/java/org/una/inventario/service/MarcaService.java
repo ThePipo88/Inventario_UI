@@ -55,7 +55,6 @@ public class MarcaService {
                 .setHeader("Content-Type", "application/json").setHeader("AUTHORIZATION", "Bearer " + token.getJwt())
                 .POST(HttpRequest.BodyPublishers.ofString(convertJson)).build();
         CompletableFuture<HttpResponse<String>> response = client.sendAsync(request,HttpResponse.BodyHandlers.ofString());
-        System.out.println(response.get().body());
 
         if(response.get().statusCode() == 500) {
             msg.show(Alert.AlertType.ERROR, "Error", "Sucedio un error creando la marca");
@@ -78,15 +77,14 @@ public class MarcaService {
         HttpRequest req = HttpRequest.newBuilder(URI.create(serviceURL+"/nombre/"+nombre))
                 .setHeader("Content-Type", "application/json").setHeader("AUTHORIZATION", "Bearer " + token.getJwt()).GET().build();
         CompletableFuture<HttpResponse<String>> response = client.sendAsync(req, HttpResponse.BodyHandlers.ofString());
-        response.thenAccept(res -> System.out.println(res));
 
         if(response.get().statusCode() == 500) {
-            System.out.println("Aerolinea No Encontrada");
+
         }
         else
         {
             if (response.get().body().isBlank()) {
-                System.out.println("No existen aerolineas con este Id");
+
             }
             else{
                 marca = mapper.readValue(response.get().body(), MarcaDTO.class);
