@@ -50,6 +50,10 @@ public class ReportesController extends Controller{
     @FXML
     public Pane pnReporte;
     @FXML
+    public JFXButton btnComenzar;
+    @FXML
+    public Pane pnCSV;
+    @FXML
     private TableColumn tb_id;
     @FXML
     private TableColumn tb_nombre;
@@ -72,10 +76,12 @@ public class ReportesController extends Controller{
 
         if(ventana == "Reporte"){
             pnReporte.setVisible(true);
+            pnCSV.setVisible(false);
             inicializarTabla();
         }
         else{
             pnReporte.setVisible(false);
+            pnCSV.setVisible(true);
         }
         //AuthenticationResponse authenticationResponse = (AuthenticationResponse) AppContext.getInstance().get("Rol");
         //txtUsuario.setText(authenticationResponse.getUsuarioDTO().getNombreCompleto());
@@ -165,6 +171,10 @@ public class ReportesController extends Controller{
         }else{
             msg.show(Alert.AlertType.ERROR, "Error", "La fechas ingresadas son incorrectas, vuelva a intentarlo");
         }
+    }
+
+    public void onActionComenzar(ActionEvent actionEvent) {
+         FlowController.getInstance().goViewInWindow("BusquedaCSV");
     }
 }
 
