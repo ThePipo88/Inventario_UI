@@ -58,11 +58,6 @@
                   <Font size="15.0" />
                </font>
             </Text>
-            <ImageView fx:id="img30" fitHeight="21.0" fitWidth="317.0" layoutX="466.0" layoutY="865.0">
-               <image>
-                  <Image url="@../imagenes/30.png" />
-               </image>
-            </ImageView>
          </children>
       </Pane>
       <Pane fx:id="paneEditar" prefHeight="900.0" prefWidth="1214.0" style="-fx-background-color: #393351;" visible="false">
@@ -169,7 +164,7 @@
             <JFXButton fx:id="btnDescargar" layoutX="446.0" layoutY="768.0" onAction="#onActioDescartar" styleClass="Boton" stylesheets="@Login.css" text="Descartar" />
             <JFXButton fx:id="btnSubir" layoutX="566.0" layoutY="785.0" onAction="#onActionSubir" styleClass="Boton" stylesheets="@Login.css" text="Subir datos" visible="false" />
             <JFXButton fx:id="btnModificar" layoutX="684.0" layoutY="768.0" onAction="#onActionModificar" styleClass="Boton" stylesheets="@Login.css" text="Modificar" />
-            <Text fx:id="txtDatosTotal" fill="WHITE" layoutX="423.0" layoutY="629.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Se subiran un total de 45 activos a la base de datos" visible="false" wrappingWidth="437.0">
+            <Text fx:id="txtDatosTotal" fill="WHITE" layoutX="423.0" layoutY="646.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Se subiran un total de 45 activos a la base de datos" visible="false" wrappingWidth="369.0">
                <font>
                   <Font size="16.0" />
                </font>
@@ -193,21 +188,6 @@
                   <Font size="15.0" />
                </font>
             </Text>
-            <ImageView fx:id="img60" fitHeight="21.0" fitWidth="317.0" layoutX="466.0" layoutY="865.0">
-               <image>
-                  <Image url="@../imagenes/60.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="img90" fitHeight="21.0" fitWidth="317.0" layoutX="466.0" layoutY="865.0" visible="false">
-               <image>
-                  <Image url="@../imagenes/90.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="img100" fitHeight="21.0" fitWidth="317.0" layoutX="466.0" layoutY="865.0" visible="false">
-               <image>
-                  <Image url="@../imagenes/100.png" />
-               </image>
-            </ImageView>
          </children>
       </Pane>
    </children>

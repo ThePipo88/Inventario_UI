@@ -28,7 +28,6 @@ import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 import javafx.util.Callback;
 import javafx.util.Duration;
-import lombok.val;
 import org.una.inventario.data.ActivoData;
 import org.una.inventario.data.Reporte;
 import org.una.inventario.dto.ActivoDTO;
@@ -144,12 +143,6 @@ public class BusquedaCSVController extends Controller{
     public Text txtDatosSubidos;
     @FXML
     public Text txtInformacion;
-    @FXML
-    public ImageView img60;
-    @FXML
-    public ImageView img90;
-    @FXML
-    public ImageView img100;
 
     private Mensaje msg = new Mensaje();
 
@@ -381,12 +374,12 @@ public class BusquedaCSVController extends Controller{
             errores += "\nTiempo edicion de registros: ";
             regFin = System.nanoTime();
             Long fin = regFin - regInit;
-            long convertS1 = TimeUnit.SECONDS.convert(fin, TimeUnit.NANOSECONDS);
-            errores += convertSecondstoMinutes(Integer.parseInt(String.valueOf(convertS1)));
+            long convert = TimeUnit.SECONDS.convert(fin, TimeUnit.NANOSECONDS);
+            errores += String.valueOf(convert)+" segundos";
 
             errores += "\nTiempo de subida en BD: ";
             long convert2 = TimeUnit.SECONDS.convert(subidaDB, TimeUnit.NANOSECONDS);
-            errores += convertSecondstoMinutes(Integer.parseInt(String.valueOf(convert2)));
+            errores += String.valueOf(convert2)+" segundos";
 
             if(!file.exists()){
                 file.createNewFile();
@@ -457,31 +450,6 @@ public class BusquedaCSVController extends Controller{
         return numero.matches(regex);
     }
 
-    private String convertSecondstoMinutes(int secods){
-        int input= secods;
-        int hours=0;
-        int minutes=0;
-        int seconds=0;
-        //Hour Conversion
-        if((input/3600)!=0) // 1 hour = 3600 seconds
-        {
-            hours=input/3600;
-            input=input%3600;
-        }
-        //Minute Conversion
-        if((input/60)!=0) //1 minute= 60 Seconds
-        {
-            minutes=input/60;
-            input=input%60;
-        }
-        //Second Conversion
-        if((input)!=0)
-        {
-            seconds=input;
-        }
-        String output=hours+" horas : "+minutes+" minutos :"+seconds+" Segudos ";
-        return output;
-    }
     private void setDataOnTableView(){
 
         tbActivos.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -747,8 +715,6 @@ public class BusquedaCSVController extends Controller{
         thread.start();
 
         translate.setOnFinished(event -> {
-            img90.setVisible(false);
-            img100.setVisible(true);
             txtDatosTotal.setVisible(false);
             txtSubirDatos.setVisible(false);
             txtDatosSubidos.setVisible(true);
@@ -841,8 +807,6 @@ public class BusquedaCSVController extends Controller{
             this.stage.close();
         }
         else{
-            img60.setVisible(false);
-            img90.setVisible(true);
             vbEditarDatos.setVisible(false);
             btnDescargar.setVisible(false);
             btnModificar.setVisible(false);
@@ -851,7 +815,6 @@ public class BusquedaCSVController extends Controller{
             txtDatosTotal.setText("Se subiran un total de "+tbActivos.getItems().size()+" activos a la base de datos");
             txtSubirDatos.setVisible(true);
             btnSubir.setVisible(true);
-            btnSiguienteSubir.setText("Finalizar");
         }
     }
 
